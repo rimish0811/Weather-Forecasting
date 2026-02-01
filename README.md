@@ -41,3 +41,6 @@ WeatherAPI
 
 Minor differences compared to Google Weather are expected due to different weather data models.
 This project demonstrates real-world API integration and professional frontend logic.
+
+<h2>WEB VIEW </h2>
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/b1066b2f-3ee8-4134-ae1e-7a35e64a687a" />

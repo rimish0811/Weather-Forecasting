@@ -46,10 +46,13 @@ This project demonstrates real-world API integration and professional frontend l
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/b1066b2f-3ee8-4134-ae1e-7a35e64a687a" />
 
 <h2>TAB VIEW</h2>
-![Screenshot_20260201_064822_Chrome](https://github.com/user-attachments/assets/d76b5434-6368-478b-b1a5-20b82d5c2961)
-![Screenshot_20260201_065047_Chrome](https://github.com/user-attachments/assets/730f7f50-e6ab-4ce5-bbb4-f26ceea8637e)
-![Screenshot_20260201_065152_Chrome](https://github.com/user-attachments/assets/c7300950-577c-4dbe-bc80-426cd2ee1346)
-![Screenshot_20260201_065226_Chrome](https://github.com/user-attachments/assets/4e8f5483-ca77-49ff-a189-dc886eaa4c86)
+<img width="451" height="758" alt="image" src="https://github.com/user-attachments/assets/07599e63-c1a9-4cb7-b4b5-29c1c5d1a90c" />
+<img width="453" height="756" alt="image" src="https://github.com/user-attachments/assets/085b41d0-36c7-47e4-b27c-f0ec1206a860" />
+<img width="461" height="758" alt="image" src="https://github.com/user-attachments/assets/cf127fd0-dd13-4a0f-80fa-3bbe137d0361" />
+<img width="447" height="759" alt="image" src="https://github.com/user-attachments/assets/5c33f6a4-4fa7-43f9-934a-584ad6d9f97a" />
+
+
+
 
 
 

@@ -44,3 +44,13 @@ This project demonstrates real-world API integration and professional frontend l
 
 <h2>WEB VIEW </h2>
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/b1066b2f-3ee8-4134-ae1e-7a35e64a687a" />
+
+<h2>TAB VIEW</h2>
+![Screenshot_20260201_064822_Chrome](https://github.com/user-attachments/assets/d76b5434-6368-478b-b1a5-20b82d5c2961)
+![Screenshot_20260201_065047_Chrome](https://github.com/user-attachments/assets/730f7f50-e6ab-4ce5-bbb4-f26ceea8637e)
+![Screenshot_20260201_065152_Chrome](https://github.com/user-attachments/assets/c7300950-577c-4dbe-bc80-426cd2ee1346)
+![Screenshot_20260201_065226_Chrome](https://github.com/user-attachments/assets/4e8f5483-ca77-49ff-a189-dc886eaa4c86)
+
+
+
+

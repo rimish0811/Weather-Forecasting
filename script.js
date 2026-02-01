@@ -1,5 +1,5 @@
 const openWeatherKey = "dfe40acb558c2b7b4507435292e988df";
-const weatherApiKey = "84093dfdf62643748d404656260102"; // weatherapi.com key
+const weatherApiKey = "84093dfdf62643748d404656260102"; 
 
 const cityInput = document.getElementById("city_input");
 const searchBtn = document.getElementById("searchBtn");
@@ -43,7 +43,8 @@ function getCityCoordinates(city){
         if(!data.length) return alert("City not found");
         const {lat, lon, name, country} = data[0];
         getWeatherByCoords(lat, lon, name, country);
-    });
+    })
+    .catch(() => alert("Error fetching coordinates"));
 }
 
 /* ---------------- MAIN FETCH ---------------- */
@@ -67,19 +68,28 @@ async function getWeatherByCoords(lat, lon, name="", country=""){
         const air = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${openWeatherKey}`).then(r=>r.json());
         updateAirQuality(air);
 
-    }catch{
+    }catch(err){
+        console.error(err);
         alert("Weather services unreachable");
     }
 }
 
-/* ---------------- TIME HELPER ---------------- */
-function formatLocalTime(unix, timezone){
-    return new Date((unix + timezone) * 1000)
-        .toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit"});
+/* ---------------- FIXED TIME HELPER ---------------- */
+function formatLocalTime(unix, timezone) {
+    // Adding the timezone offset to unix timestamp
+    // We use timeZone: 'UTC' to prevent JS from adding your local computer's offset
+    const date = new Date((unix + timezone) * 1000);
+    return date.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+        timeZone: "UTC" 
+    });
 }
 
-/* ---------------- CURRENT WEATHER (AVERAGE) ---------------- */
+/* ---------------- CURRENT WEATHER ---------------- */
 function updateCurrentWeatherAverage(ow, wa, avgTemp, avgFeels, avgHumidity, avgWind, name, country){
+    // Use the same logic for the main date display
     const localDate = new Date((ow.dt + ow.timezone) * 1000);
 
     currentCard.innerHTML = `
@@ -106,6 +116,7 @@ function updateCurrentWeatherAverage(ow, wa, avgTemp, avgFeels, avgHumidity, avg
     windSpeedVal.textContent = avgWind + " m/s";
     feelsVal.textContent = avgFeels + "°C";
 
+    // Applying the fixed formatting
     sunriseVal.textContent = formatLocalTime(ow.sys.sunrise, ow.timezone);
     sunsetVal.textContent = formatLocalTime(ow.sys.sunset, ow.timezone);
 }
@@ -115,31 +126,38 @@ function updateForecast(data){
     const daily = data.list.filter(item => item.dt_txt.includes("12:00:00"));
 
     daily.forEach((item, i) => {
-        const date = new Date((item.dt + data.city.timezone) * 1000);
-        forecastItems[i].innerHTML = `
-            <div class="icon-wrapper">
-                <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
-                <span>${item.main.temp.toFixed(1)}°C</span>
-            </div>
-            <p>${days[date.getUTCDay()]}</p>
-            <p>${date.getUTCDate()} ${months[date.getUTCMonth()]}</p>
-        `;
+        if(forecastItems[i]) {
+            const date = new Date((item.dt + data.city.timezone) * 1000);
+            forecastItems[i].innerHTML = `
+                <div class="icon-wrapper">
+                    <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}.png">
+                    <span>${item.main.temp.toFixed(1)}°C</span>
+                </div>
+                <p>${days[date.getUTCDay()]}</p>
+                <p>${date.getUTCDate()} ${months[date.getUTCMonth()]}</p>
+            `;
+        }
     });
 
-    hourlyCards.forEach((card,i)=>{
-        const h = data.list[i];
-        const time = formatLocalTime(h.dt, data.city.timezone);
-        card.innerHTML = `
-            <p>${time}</p>
-            <img src="https://openweathermap.org/img/wn/${h.weather[0].icon}.png">
-            <p>${h.main.temp.toFixed(1)}°C</p>
-        `;
+    hourlyCards.forEach((card, i) => {
+        if(data.list[i]) {
+            const h = data.list[i];
+            const time = formatLocalTime(h.dt, data.city.timezone);
+            card.innerHTML = `
+                <p>${time}</p>
+                <img src="https://openweathermap.org/img/wn/${h.weather[0].icon}.png">
+                <p>${h.main.temp.toFixed(1)}°C</p>
+            `;
+        }
     });
 }
 
 /* ---------------- AIR QUALITY ---------------- */
 function updateAirQuality(data){
     const air = data.list[0].components;
+    // Map the API response to your UI order
     const values = [air.pm2_5, air.pm10, air.so2, air.co, air.no, air.no2, air.nh3, air.o3];
-    airItems.forEach((el,i)=> el.textContent = values[i].toFixed(1));
+    airItems.forEach((el, i) => {
+        if(values[i] !== undefined) el.textContent = values[i].toFixed(1);
+    });
 }
